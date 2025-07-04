@@ -6,8 +6,8 @@ interface PokeCardProps {
   types: string[];
   image: string;
   description: string;
-  beforePoke: () => string[]; 
-  afterPoke: () => string[]; 
+  beforePoke: () => void; 
+  afterPoke: () => void; 
 }
 
 export function PokeCard({id, name, types, image, description, beforePoke, afterPoke}: PokeCardProps) {
@@ -20,16 +20,18 @@ export function PokeCard({id, name, types, image, description, beforePoke, after
 
     }
 
+    const cardStyle = `poke-card relative w-64 h-72 border border-black rounded-md cursor-pointer perspective ${types.includes("Fire") ? "bg-red-100" : "bg-white"}`; 
+
     return (
 
          <div
       key={id}
-      className="poke-card relative w-64 h-96 cursor-pointer perspective mx-auto"
+      className={cardStyle}
       onClick={flipCard}
     >
       {/* FRONT SIDE */}
       <section
-        className={`absolute inset-0 transition-transform duration-500 ease-in-out backface-hidden bg-white shadow-xl rounded-xl p-4 ${
+        className={`absolute inset-0 transition-transform duration-500 ease-in-out backface-hidden bg-white shadow-xl rounded-xl p-4 d-flex flex-col justify-between ${
           isFlipped ? 'rotate-y-180 hidden' : 'rotate-y-0 block'
         }`}
       >
